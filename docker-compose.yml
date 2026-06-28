@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: ml_backend
+    ports:
+      - "8000:8000"
+    networks:
+      - webnet
+
+  frontend:
+    build: ./frontend
+    container_name: ml_frontend
+    ports:
+      - "8501:8501"
+    depends_on:
+      - backend
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
